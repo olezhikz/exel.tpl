@@ -43,7 +43,7 @@ $objReader = new PHPExcel_Reader_Excel5();
 $objPHPExcel = $objReader->load($inputFileName);
 $sheetData = $objPHPExcel->getActiveSheet()->toArray(null,true,true,true);
 
-$maxNum = 10;
+$maxNum = 11;
 $resultColumn = 'N';
 //$abc 		= array('C','D','E','F','G');
 $abc = array(
@@ -85,6 +85,11 @@ for ($i=1; $i< count($sheetData) ; $i++) {
 					$checkArr =  explode(" ", $sheetData[$i][$key]);
 					$checkMaxNum = (int)$checkArr[0];
 					if( $checkMaxNum <= $maxNum && $checkMaxNum != $maxNum ){
+						foreach ($numArr as $checKey2 => $checkValue2) {
+							if ($checkMaxNum == $checKey2 ) {
+								 $checkMaxNum = $checkValue2;
+							}
+						}
 						$sheetData[$i][$key]  = $checkMaxNum;
 					} else {
 						$sheetData[$i][$key]  = 0;
@@ -96,13 +101,15 @@ for ($i=1; $i< count($sheetData) ; $i++) {
 		}
 	}
 }
+// echo "<pre>";
+//var_dump($sheetData);
+// echo "</pre>";
 
 // Create new PHPExcel object
 $objWriter = new PHPExcel();
 
 for ($i=1; $i< count($sheetData); $i++) {
 	foreach ($sheetData[$i] as $latter => $cellValue) {
-	//	echo $latter;
 		$objWriter->setActiveSheetIndex(0)->setCellValue( $latter.$i, $cellValue);
 	}
 }
