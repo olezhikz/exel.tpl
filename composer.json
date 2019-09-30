@@ -1,0 +1,14 @@
+{
+    "name": "olegdemidov/exel",
+    "description": "Library for plugin admin",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oleg",
+            "email": "boxmilo@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
